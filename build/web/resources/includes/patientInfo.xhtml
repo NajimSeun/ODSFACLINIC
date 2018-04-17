@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <ui:composition >
+        <h:body>
+            <h:form>
+                <div class="panel panel-warning panel-bs"  style="overflow: hidden"  >
+                <div class="panel-heading text-justify">
+                    #{odp.patient} #{odp.info}
+                </div>
+                <div class="panel-body">
+
+                    <div class="row">
+                        <div class="col-xs-6 col-sm-6">
+                            <h:outputLabel  value="#{odp.nom}"  />
+
+                            <h:outputText value=":      #{odsfaClinicBean.patient.cardNumber}" styleClass="text-right" />
+                        </div>
+                        <div class="col-xs-6 col-sm-6">
+
+                        </div>
+                    </div>
+                    <div  class="row">
+                        <div class="col-xs-6 col-sm-6">
+                            <h:outputLabel  value="#{odp.name}"  />
+
+                            <h:outputText value=":      #{odsfaClinicBean.patient.name}" styleClass="text-right" />
+                        </div>
+                        <div class="col-xs-6 col-sm-6">
+                            <h:outputLabel  value="#{odp.surname}"   />
+                            <h:outputText value=":      #{odsfaClinicBean.patient.surname}" styleClass="text-right" />
+                        </div>
+                    </div>
+
+                    <div  class="row">
+                        <div class="col-xs-6 col-sm-6">
+                            <h:outputLabel  value="#{odp.sex}"  />
+                            <h:outputText value=":      #{odsfaClinicBean.patient.sex}" styleClass="text-right" />
+                        </div>
+                        <div class="col-xs-6 col-sm-6">
+                            <h:outputLabel  value="#{odp.age}"   />
+                            <h:outputText value=":      #{odsfaClinicBean.patient.age}" styleClass="text-right" />
+                        </div>
+                    </div>
+
+                    <div  class="row">
+                        <div class="col-xs-6 col-sm-6">
+                            <h:outputLabel  value="#{odp.phoneNum}"  />
+                            <h:outputText value=":      #{odsfaClinicBean.patient.phoneNumber}" styleClass="text-right" />
+
+                        </div>
+                        <div class="col-xs-6 col-sm-6">
+                            <h:outputLabel  value="#{odp.address}"   />
+                            <h:outputText value=":      #{odsfaClinicBean.patient.address}" styleClass="text-right"/>
+                        </div>
+                    </div>
+
+                    <div  class="row">
+                        <div class="col-xs-6 col-sm-6">
+                            <h:outputLabel  value="#{odp.bloodGrp}"  />
+                            <h:outputText value=":      #{odsfaClinicBean.patient.bloodGroup}" styleClass="text-right" />
+                        </div>
+                        <div class="col-xs-6 col-sm-6">
+                            <h:outputLabel  value="#{odp.genotype}"   />
+                            <h:outputText value=":      #{odsfaClinicBean.patient.genotype}" styleClass="text-right" />
+                        </div>
+                    </div>
+                </div>  
+
+            </div>
+            </h:form>
+        </h:body>
+    </ui:composition>
+</html>
+

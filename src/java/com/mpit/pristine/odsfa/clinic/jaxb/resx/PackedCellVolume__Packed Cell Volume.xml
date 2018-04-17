@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<jaxbInvestigationParameterConfig>
+    <parameterName>Packed Cell Volume</parameterName>
+    <range>
+        <lowerLimit>0</lowerLimit>
+        <rangeVariation>0</rangeVariation>
+        <upperLimit>0</upperLimit>
+    </range>
+    <hasRange>true</hasRange>
+    <hasPredefinedValues>false</hasPredefinedValues>
+    <paramUnit>%</paramUnit>
+</jaxbInvestigationParameterConfig>

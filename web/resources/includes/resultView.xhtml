@@ -1,0 +1,107 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <ui:composition>
+        <h:body>
+            <h:form id="resultViewForm">
+           
+                    <div class="panel panel-warning">
+                        <div class="panel-heading">
+                            <label>
+                                #{odsfaClinicBean.requestable.jiConfig.type} #{odsfaClinicBean.requestable.name}
+                             </label>
+
+                        </div>
+                        <div class="panel-body">
+
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <h:outputLabel  value="#{odp.results}- #{odsfaClinicBean.requestable.requestDate}" >
+                                        <f:convertDateTime pattern="EEE, MMM d, ''yy" />
+                                    </h:outputLabel>
+                                </div>
+                            </div>
+
+                            <p:separator />
+                            <h:outputText value="#{odp.nom} #{odp.results}" rendered="#{odsfaClinicBean.noInvestigationsRendered}" />
+                            
+                                <ui:repeat value="#{odsfaClinicBean.requestable.parameters}" var="invParam" rendered="#{not odsfaClinicBean.noInvestigationsRendered}" >
+                                    <div class="row">
+                                        <div class="padded">
+                                            <div class="col-xs-4"><label class="form-control"> #{invParam.name}</label></div>
+                                            <div class="col-xs-4"><label class="form-control"> #{invParam.value} #{invParam.jipc.paramUnit} </label></div>
+                                            <div class="col-xs-4">
+                                                <p:outputPanel autoUpdate="false" rendered="#{invParam.jipc.hasRange and invParam.valueInterpretation eq 'Abnormal' and (invParam.rangeValueIndicator eq 'High' or invParam.rangeValueIndicator eq 'high' )}" >
+                                                    <label class="form-control" >
+                                                        #{odp.abnormal}<span class="glyphicon glyphicon-arrow-up "></span>
+                                                    </label> 
+
+                                                </p:outputPanel>
+
+
+                                                <p:outputPanel autoUpdate="false" rendered="#{invParam.jipc.hasRange and invParam.valueInterpretation eq 'Abnormal' and invParam.rangeValueIndicator == 'Low' }"  >
+                                                    <label class="form-control">
+                                                        #{odp.abnormal}<span class="glyphicon  glyphicon-arrow-down"></span>
+                                                    </label>
+
+                                                </p:outputPanel>
+
+
+                                                <p:outputPanel autoUpdate="false" rendered="#{invParam.jipc.hasRange and invParam.valueInterpretation eq 'Normal'}" >
+                                                    <label class="form-control"   >
+                                                        #{odp.normal}<span class="glyphicon glyphicon-resize-horizontal"></span>
+                                                    </label>
+
+                                                </p:outputPanel>
+
+
+                                                <p:outputPanel autoUpdate="false" rendered="#{invParam.jipc.hasPredefinedValues and invParam.valueInterpretation eq 'Abnormal'}" >
+                                                    <label class="form-control"  >
+                                                        #{odp.abnormal}<span class="glyphicon  glyphicon-remove"></span>
+                                                    </label>
+
+                                                </p:outputPanel>
+
+
+
+                                                <p:outputPanel autoUpdate="false" rendered="#{invParam.jipc.hasPredefinedValues and invParam.valueInterpretation eq 'Normal'}">
+                                                    <label class="form-control"  >
+                                                        #{odp.normal}<span class="glyphicon  glyphicon-ok"></span>
+                                                    </label>
+
+
+                                                </p:outputPanel>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </ui:repeat>
+      
+                       
+
+
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <button type="button" name="resultViewOkBut" jsf:id="resultViewOkButId" class="full-width btn btn-warning"   >
+                                    #{odp.ok}
+                                </button>
+                            </div>
+                        </div>
+
+
+                    
+                </div>
+                </div>
+            </h:form>
+        </h:body>
+    </ui:composition>
+</html>
+

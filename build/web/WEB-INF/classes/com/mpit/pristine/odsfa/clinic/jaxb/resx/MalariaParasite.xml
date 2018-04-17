@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<jaxbInvestigationConfig>
+    <name>Malaria Parasite</name>
+    <type>Microbiological/Parasitological Investigation</type>
+    <numberOfParams>1</numberOfParams>
+    <investigationParameterList>Malaria Parasite</investigationParameterList>
+</jaxbInvestigationConfig>

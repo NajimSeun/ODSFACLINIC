@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<jaxbInvestigationParameterConfig>
+    <parameterName>S Paratyphi B OAg</parameterName>
+    <hasRange>false</hasRange>
+    <hasPredefinedValues>true</hasPredefinedValues>
+    <predefinedValues>
+        <normalValues>1In20</normalValues>
+        <normalValues>1In40</normalValues>
+        <normalValues>1In60</normalValues>
+        <predefinedValues>1In20</predefinedValues>
+        <predefinedValues>1In40</predefinedValues>
+        <predefinedValues>1In60</predefinedValues>
+        <predefinedValues>1In80</predefinedValues>
+        <predefinedValues>1In100</predefinedValues>
+        <predefinedValues>1In120</predefinedValues>
+    </predefinedValues>
+    <paramUnit></paramUnit>
+</jaxbInvestigationParameterConfig>

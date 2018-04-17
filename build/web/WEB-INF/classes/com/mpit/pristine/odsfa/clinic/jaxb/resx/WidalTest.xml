@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<jaxbInvestigationConfig>
+    <name>Widal Test</name>
+    <type>Microbiological/Parasitological Investigation</type>
+    <numberOfParams>8</numberOfParams>
+    <investigationParameterList>S Paratyphi A OAg</investigationParameterList>
+    <investigationParameterList>S Paratyphi B OAg</investigationParameterList>
+    <investigationParameterList>S Paratyphi C OAg</investigationParameterList>
+    <investigationParameterList>S Typhi OAg</investigationParameterList>
+    <investigationParameterList>S Paratyphi A HAg</investigationParameterList>
+    <investigationParameterList>S Paratyphi B HAg</investigationParameterList>
+    <investigationParameterList>S Paratyphi C HAg</investigationParameterList>
+    <investigationParameterList>S Typhi HAg</investigationParameterList>
+</jaxbInvestigationConfig>

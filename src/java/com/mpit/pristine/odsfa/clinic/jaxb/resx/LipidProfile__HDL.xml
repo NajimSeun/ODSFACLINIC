@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<jaxbInvestigationParameterConfig>
+    <parameterName>HDL</parameterName>
+    <range>
+        <lowerLimit>40</lowerLimit>
+        <rangeVariation>0</rangeVariation>
+        <upperLimit>60</upperLimit>
+    </range>
+    <hasRange>true</hasRange>
+    <hasPredefinedValues>false</hasPredefinedValues>
+    <paramUnit>mg/dl</paramUnit>
+</jaxbInvestigationParameterConfig>

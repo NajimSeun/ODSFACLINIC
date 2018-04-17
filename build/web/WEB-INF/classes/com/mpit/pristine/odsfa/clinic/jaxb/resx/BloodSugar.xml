@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<jaxbInvestigationConfig>
+    <name>Blood Sugar</name>
+    <type>Biochemical Investigation</type>
+    <numberOfParams>2</numberOfParams>
+    <investigationParameterList>Random Blood Sugar</investigationParameterList>
+    <investigationParameterList>Fasting Blood Sugar</investigationParameterList>
+</jaxbInvestigationConfig>

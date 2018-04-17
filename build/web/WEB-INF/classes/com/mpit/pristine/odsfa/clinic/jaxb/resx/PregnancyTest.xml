@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<jaxbInvestigationConfig>
+    <name>Pregnancy Test</name>
+    <type>Biochemical Investigation</type>
+    <numberOfParams>1</numberOfParams>
+    <investigationParameterList>Pregnancy Test</investigationParameterList>
+</jaxbInvestigationConfig>

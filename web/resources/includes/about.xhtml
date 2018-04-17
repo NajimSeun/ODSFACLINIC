@@ -1,0 +1,80 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:jsf="http://xmlns.jcp.org/jsf">
+    
+    <ui:composition>
+    <h:body>
+        <h:form id="aboutForm">
+            <div class="panel panel-warning">
+                <div class="panel-heading">
+                    <label class="label label-warning">
+                    #{odp.about}
+                    </label>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-xs-12"></div>
+                        <label class="label "> #{odp.odsfaClinic} 
+                        </label>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <label class="label label-warning">
+                            #{odp.devby}: 
+                            </label>
+                        </div> 
+                        <div class="col-xs-9">
+                            <h:outputLabel value="#{odp.developedby}" styleClass="form-control-odsfa" />
+                               
+                            
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <label class=" label label-warning ">
+                            #{odp.purp}:
+                            </label>
+                        </div>
+                        <div class="col-xs-9">
+                           <h:outputLabel value="#{odp.purpose}" styleClass="form-control-odsfa" />
+                                 
+                           
+                           
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <label class=" label label-warning">
+                            #{odp.contact}:
+                            </label>
+                        </div>
+                        <div class="col-xs-9">
+                          <h:outputLabel value="#{odp.conemail} , #{odp.contel}" styleClass="form-control-odsfa" />
+                                
+                          
+                          
+                                
+                          
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <button jsf:id="aboutButton" type="button" class="btn btn-warning full-width" >
+                                #{odp.ok}
+                                <p:ajax process="@all" listener="#{odsfaClinicBean.odsfaAboutButtonAjaxListener}" />
+                            </button> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </h:form>
+    </h:body>
+    </ui:composition>
+</html>
+

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<jaxbInvestigationParameterConfig>
+    <parameterName>HbsAg</parameterName>
+    <hasRange>false</hasRange>
+    <hasPredefinedValues>true</hasPredefinedValues>
+    <predefinedValues>
+        <normalValues>Non Reactive</normalValues>
+        <predefinedValues>Reactive</predefinedValues>
+        <predefinedValues>Non-Reactive</predefinedValues>
+    </predefinedValues>
+    <paramUnit></paramUnit>
+</jaxbInvestigationParameterConfig>

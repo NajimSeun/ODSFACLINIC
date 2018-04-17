@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<jaxbInvestigationConfig>
+    <name>Lipid Profile</name>
+    <type>Biochemical Investigation</type>
+    <numberOfParams>4</numberOfParams>
+    <investigationParameterList>LDL</investigationParameterList>
+    <investigationParameterList>HDL</investigationParameterList>
+    <investigationParameterList>Triglycerides</investigationParameterList>
+    <investigationParameterList>Total cholesterol</investigationParameterList>
+</jaxbInvestigationConfig>

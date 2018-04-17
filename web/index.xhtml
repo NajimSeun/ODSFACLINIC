@@ -1,0 +1,367 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>#{odp.odsfaClinic}</title>
+        <h:outputStylesheet library="css" name="bootstrap.css" />
+        <h:outputStylesheet library="css" name="jquery.mmenu.css" />
+        <link  rel="stylesheet" type="text/css" href="./resources/css/jquery.mmenu.themes.css" media="all and (min-width: 900px)" />
+        <link  rel="stylesheet" type="text/css" href="./resources/css/jquery.mmenu.widescreen.css" media="all and (min-width: 900px)" />
+        <h:outputStylesheet library="css" name="styles.css" />
+        <link  rel="stylesheet" type="text/css" href="./resources/css/font-awesome.min.css" />
+        <h:outputScript library="js" name="bootstrap.min.js" />
+        <h:outputScript library="js" name="jquery.mmenu.min.js" />
+
+        
+        <style>
+            html.bootstrap-theme .mm-menu
+            {
+                background: #222;
+            }
+
+            body form#patientDisplayForm  div.ui-datatable {
+                font-size: 0.7em;
+            }
+
+            .padded{
+                padding-left: 10px;
+                padding-right: 10px;
+            }
+        </style>
+        <script type="text/javascript">
+            $(function() {
+
+                var $menu = $('div#menu'),
+                        $html = $('html');
+                $html.removeAttr('class');
+                $menu.removeClass('mm-black').removeClass('mm-light').removeClass('mm-white');
+                $html.addClass('bootstrap-theme');
+                $menu.mmenu({
+                    zpos: 'mn-next'
+                });
+            });
+            function remote() {
+
+                //alert("Open up");
+
+            }
+
+            function updateInput(clientId, str) {
+
+                $(PrimeFaces.escapeClientId(clientId)).val(str)
+
+            }
+
+            function cleanAllTextInputs(parentForm) {
+                //alert("Clean is Input")
+                cleanInputs(parentForm)
+                cleanOtherInputs()
+            }
+
+            function cleanInputs(parentForm) {
+                var selector = "#" + parentForm + "input:text"
+                $(selector).val("");
+
+            }
+            function cleanOtherInputs() {
+                $('.otherInput').val("")
+            }
+            function cleanInput(inputId) {
+
+                $(PrimeFaces.escapeClientId(inputId)).val("")
+            }
+            function show() {
+                $('#odsfaAjaxModal').modal('show');
+            }
+            
+            function hide() {
+                $('#odsfaAjaxModal').modal('hide');
+            }
+        </script>
+
+    </h:head>
+    <h:body id="body">
+
+
+
+        <div id="odsfa-wrapper">
+            <p:growl autoUpdate="true"  life="7000" />
+            <div id="odsfa-header-wrapper"  style="overflow:hidden"  >
+                <div id="odsfa-header">
+                    <div class="navbar navbar-inverse navbar-static-top">
+                        <div class="container">
+
+                            <div class="navbar-header">
+
+                                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                </button>
+                                <a class="navbar-brand" href="#"><p:graphicImage height="35" width="70" library="img" name="new-ondo-logo.png" /></a>
+                                <a class="navbar-brand" href="#"><p:graphicImage height="35" width="70" library="img" name="new-odsfa-logo.png" /></a>
+                            </div>
+                            <div class="collapse navbar-collapse">
+                                <h:form  id="navBarForm" styleClass="navbar-form ">
+                                     
+                                    <ul class="nav navbar-nav">
+                                        <li ><a href="#">#{odp.ODSFA} #{odp.home}</a></li>
+                                        <li><p:commandLink value="#{odp.about}" >
+                                                <p:ajax listener="#{odsfaClinicBean.odsfaAboutMenuLinkAjaxListener}" />
+                                            </p:commandLink></li>
+                                        <li><a href="#contact">#{odp.visitus}</a></li>
+                                        <li><a><p:spacer width="85" height="1" /></a></li>
+                                    </ul>
+
+
+                                    <div class="form-group">
+                                        <input name="patientFileNumEntry" jsf:id="patientFileNumEntry" value="#{odsfaClinicBean.enteredId}" type="text" placeholder="#{odp.no}" class="form-control" />
+                                    </div>
+                                    <p:spacer width="8" height="1" />
+                                    <button name="odsfaOpenPatientBut" jsf:id="odsfaOpenPatientButId" type="button" class="btn btn-warning">
+                                        #{odp.open}
+                                        <span class=" glyphicon glyphicon-open"></span>
+                                        <p:ajax event="click"  process="@this patientFileNumEntry"     listener="#{odsfaClinicBean.odsfaOpenPatientButtonListener}" oncomplete="cleanInput('#{p:component('patientFileNumEntry')}')" />
+                                    </button>
+                                    <p:spacer width="8" height="1" />
+                                    <button name="odsfaClosePatientBut" jsf:id="odsfaClosePatientButId" type="button" class="btn btn-warning">
+                                        #{odp.close}
+                                        <span class="glyphicon glyphicon-stop"></span>
+                                        <p:ajax event="click" process="@this" update="patientFileNumEntry"  listener="#{odsfaClinicBean.odsfaClosePatientButtonListener}" />
+                                    </button>
+                                </h:form>
+                            </div><!--/.nav-collapse -->
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+            </div>
+            <div id="odsfa-content-wrapper"  >
+                <p:messages autoUpdate="true" closable="true"   />
+                <p:outputPanel autoUpdate="true">
+
+                    <ui:include  src="./resources/includes/#{odsfaClinicBean.templateName_2}.xhtml"  />   
+
+                    <div>
+                        <ui:include src="./resources/includes/#{odsfaClinicBean.templateName}.xhtml"  />
+                    </div>
+
+                </p:outputPanel>
+            </div>
+
+
+        </div>    
+
+
+        <h:form id="menuForm">
+            <div id="menu">
+
+                <ul>
+                    <li><a href="#"></a></li>
+
+                    <li>
+                        <p:link href="#" value="#{odp.patients}">
+
+                        </p:link>
+                        <ul>
+                            <li><p:commandLink   value="#{odp.register}"  id="regShowLink" >
+                                    <p:ajax listener="#{odsfaClinicBean.odsfaPatientPanelRequestListener}" />
+                                </p:commandLink></li>
+
+                            <li><p:commandLink  value="#{odp.refresh}">
+                                    <p:ajax   listener="#{odsfaClinicBean.odsfaPatientRefreshRequestAjaxListener}"  />
+                                </p:commandLink>
+                            </li>
+                            <li><p:commandLink  value="#{odp.view} #{odp.all}">
+                                    <p:ajax   listener="#{odsfaClinicBean.odsfaAllPatientAjaxListener}"  />
+                                </p:commandLink></li>
+
+                            <li><p:commandLink  value="#{odp.edit}">
+                                    <p:ajax   listener="#{odsfaClinicBean.odsfaPatientEditRequestListener}"  />
+                                </p:commandLink></li>
+
+                        </ul>
+                    </li>
+
+
+                    <li><p:link href="#" value="#{odp.bloodSugar}">
+
+                        </p:link>
+                        <ul>
+                            <li><p:commandLink  value="#{odp.register}">
+                                    <f:param name="paramName" value="Blood Sugar" />
+                                    <f:param name="requestType" value="register" />
+                                    <p:ajax process="@this"  listener="#{odsfaClinicBean.odsfaMenuLinkAjaxListener}" />
+                                </p:commandLink></li>
+                            <li>
+                                <p:commandLink value="#{odp.view}">
+                                    <f:param name="paramName" value="Blood Sugar" />
+                                    <f:param name="requestType" value="view" />
+                                    <p:ajax process="@this"  listener="#{odsfaClinicBean.odsfaMenuLinkAjaxListener}" />
+                                </p:commandLink>     
+                            </li>
+                            <li><p:commandLink  value="#{odp.view} #{odp.all}">
+                                    <f:param name="paramName" value="Blood Sugar" />
+                                    <f:param name="requestType" value="view All" />
+                                    <p:ajax process="@this"  listener="#{odsfaClinicBean.odsfaMenuLinkAjaxListener}" />
+                                </p:commandLink></li>
+                        </ul>
+                    </li>
+                    <li><p:link href="#" value="#{odp.malariaparasite}"></p:link>
+                        <ul> 
+                            <li><p:commandLink   value="#{odp.register}" >
+                                    <f:param name="paramName" value="Malaria Parasite" />
+                                    <f:param name="requestType" value="register" />
+                                    <p:ajax process="@this"  listener="#{odsfaClinicBean.odsfaMenuLinkAjaxListener}" />
+                                </p:commandLink></li>
+                            <li><p:commandLink  value="#{odp.view}">
+                                    <f:param name="paramName" value="Malaria Parasite" />
+                                    <f:param name="requestType" value="view" />
+                                    <p:ajax process="@this"  listener="#{odsfaClinicBean.odsfaMenuLinkAjaxListener}" />
+                                </p:commandLink></li>
+                            <li><p:commandLink  value="#{odp.view} #{odp.all}">
+                                    <f:param name="paramName" value="Malaria Parasite" />
+                                    <f:param name="requestType" value="view All" />
+                                    <p:ajax process="@this" listener="#{odsfaClinicBean.odsfaMenuLinkAjaxListener}" />
+                                </p:commandLink></li>
+                        </ul> 
+                    </li>
+
+
+
+                    <li>  <p:link href="#" value="#{odp.lipidProfile}"></p:link> 
+                        <ul>
+                            <li><p:commandLink  value="#{odp.register}">
+                                    <f:param name="paramName" value="Lipid Profile" />
+                                    <f:param name="requestType" value="register" />
+                                    <p:ajax process="@this"  listener="#{odsfaClinicBean.odsfaMenuLinkAjaxListener}" />
+                                </p:commandLink>
+
+                            </li>
+                            <li> <p:commandLink  value="#{odp.view}">
+                                    <f:param name="paramName" value="Lipid Profile" />
+                                    <f:param name="requestType" value="view" />
+                                    <p:ajax process="@this"  listener="#{odsfaClinicBean.odsfaMenuLinkAjaxListener}" />
+                                </p:commandLink> 
+
+                            </li>
+                            <li><p:commandLink  value="#{odp.view} #{odp.all}">
+                                    <f:param name="paramName" value="Lipid Profile" />
+                                    <f:param name="requestType" value="view All" />
+                                    <p:ajax process="@this"  listener="#{odsfaClinicBean.odsfaMenuLinkAjaxListener}" />
+                                </p:commandLink></li>
+                        </ul>
+                    </li>
+                    <li> <p:link href="#" value="#{odp.packedCellVolume}"></p:link> 
+                        <ul>
+                            <li> <p:commandLink  value="#{odp.register}">
+                                    <f:param name="paramName" value="Packed Cell Volume" />
+                                    <f:param name="requestType" value="register" />
+                                    <p:ajax process="@this"  listener="#{odsfaClinicBean.odsfaMenuLinkAjaxListener}" />
+                                </p:commandLink> </li>
+                            <li> <p:commandLink  value="#{odp.view}">
+                                    <f:param name="paramName" value="Packed Cell Volume" />
+                                    <f:param name="requestType" value="view" />
+                                    <p:ajax process="@this"  listener="#{odsfaClinicBean.odsfaMenuLinkAjaxListener}" />
+                                </p:commandLink> </li>
+                            <li><p:commandLink  value="#{odp.view} #{odp.all}">
+                                    <f:param name="paramName" value="Packed Cell Volume" />
+                                    <f:param name="requestType" value="view All" />
+                                    <p:ajax process="@this"  listener="#{odsfaClinicBean.odsfaMenuLinkAjaxListener}" />
+                                </p:commandLink></li>
+                        </ul>
+                    </li>
+                    <li>  <p:link href="#"  value="#{odp.hepatitisPanel}"></p:link> 
+                        <ul>
+                            <li> <p:commandLink  value="#{odp.register}">
+                                    <f:param name="paramName" value="Heptitis Panel Test" />
+                                    <f:param name="requestType" value="register" />
+                                    <p:ajax process="@this" update="" listener="#{odsfaClinicBean.odsfaMenuLinkAjaxListener}" />
+                                </p:commandLink> </li>
+                            <li> <p:commandLink  value="#{odp.view}">
+                                    <f:param name="paramName" value="Heptitis Panel Test" />
+                                    <f:param name="requestType" value="view" />
+                                    <p:ajax process="@this" update="" listener="#{odsfaClinicBean.odsfaMenuLinkAjaxListener}" />
+                                </p:commandLink> </li>
+                            <li><p:commandLink  value="#{odp.view} #{odp.all}">
+                                    <f:param name="paramName" value="Heptitis Panel Test" />
+                                    <f:param name="requestType" value="view All" />
+                                    <p:ajax process="@this" update="" listener="#{odsfaClinicBean.odsfaMenuLinkAjaxListener}" />
+                                </p:commandLink></li>
+                        </ul>
+                    </li>
+
+                    <li><p:link href="#" value="#{odp.pregnanctTest}"></p:link>
+                        <ul>
+                            <li> <p:commandLink  value="#{odp.register}">
+                                    <f:param name="paramName" value="Pregnancy Test" />
+                                    <f:param name="requestType" value="register" />
+                                    <p:ajax process="@this"  listener="#{odsfaClinicBean.odsfaMenuLinkAjaxListener}" />
+                                </p:commandLink> </li>
+                            <li> <p:commandLink  value="#{odp.view}">
+                                    <f:param name="paramName" value="Pregnancy Test" />
+                                    <f:param name="requestType" value="view" />
+                                    <p:ajax process="@this"  listener="#{odsfaClinicBean.odsfaMenuLinkAjaxListener}" />
+                                </p:commandLink> </li>
+                            <li><p:commandLink  value="#{odp.view} #{odp.all}">
+                                    <f:param name="paramName" value="Pregnancy Test" />
+                                    <f:param name="requestType" value="view All" />
+                                    <p:ajax process="@this"  listener="#{odsfaClinicBean.odsfaMenuLinkAjaxListener}" />
+                                </p:commandLink></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <p:link  href="#" value="#{odp.widal}"></p:link>
+                        <ul>
+                            <li>  <p:commandLink  value="#{odp.register}">
+                                    <f:param name="paramName" value="Widal Test" />
+                                    <f:param name="requestType" value="register" />
+                                    <p:ajax process="@this"  listener="#{odsfaClinicBean.odsfaMenuLinkAjaxListener}" />
+                                </p:commandLink> </li>
+                            <li>  <p:commandLink  value="#{odp.view}">
+                                    <f:param name="paramName" value="Widal Test" />
+                                    <f:param name="requestType" value="view" />
+                                    <p:ajax process="@this"  listener="#{odsfaClinicBean.odsfaMenuLinkAjaxListener}" />
+                                </p:commandLink> </li>
+                            <li><p:commandLink  value="#{odp.view} #{odp.all}">
+                                    <f:param name="paramName" value="Widal Test" />
+                                    <f:param name="requestType" value="view All" />
+                                    <p:ajax process="@this"  listener="#{odsfaClinicBean.odsfaMenuLinkAjaxListener}" />
+                                </p:commandLink></li>
+                        </ul>
+                    </li>
+
+                </ul>
+
+            </div>
+            <p:ajaxStatus onstart="show()"  onsuccess="hide()" onerror="hide()" oncomplete="hide()"/>
+        <div id="odsfaAjaxModal" style=" z-index: 1000"  tabindex="-1"  role="dialog" data-backdrop="false" class="modal fade" aria-labelledby="myModalLabel" aria-hidden="true" >
+
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close"  aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="myModalLabel">Please wait Loading...... </h4>
+                    </div>
+                    <div class="modal-body">
+                        <p:graphicImage library="img" name="ajaxloadingbar.gif" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        </h:form>
+        
+
+
+
+    </h:body>
+</html>
+

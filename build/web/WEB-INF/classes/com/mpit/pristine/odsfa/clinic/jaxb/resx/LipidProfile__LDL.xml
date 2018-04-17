@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<jaxbInvestigationParameterConfig>
+    <parameterName>LDL</parameterName>
+    <range>
+        <lowerLimit>0</lowerLimit>
+        <rangeVariation>29</rangeVariation>
+        <upperLimit>100</upperLimit>
+    </range>
+    <hasRange>true</hasRange>
+    <hasPredefinedValues>false</hasPredefinedValues>
+    <paramUnit>mg/dl</paramUnit>
+</jaxbInvestigationParameterConfig>

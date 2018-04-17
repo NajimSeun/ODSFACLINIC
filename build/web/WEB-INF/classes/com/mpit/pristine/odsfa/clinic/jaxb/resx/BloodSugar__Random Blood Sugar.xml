@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<jaxbInvestigationParameterConfig>
+    <parameterName>Random Blood Sugar</parameterName>
+    <range>
+        <lowerLimit>70</lowerLimit>
+        <rangeVariation>0</rangeVariation>
+        <upperLimit>140</upperLimit>
+    </range>
+    <hasRange>true</hasRange>
+    <hasPredefinedValues>false</hasPredefinedValues>
+    <paramUnit>mg/dl</paramUnit>
+</jaxbInvestigationParameterConfig>

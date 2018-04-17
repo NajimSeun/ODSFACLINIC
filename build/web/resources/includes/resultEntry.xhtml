@@ -1,0 +1,85 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <ui:composition>
+        <h:body>
+            <h:form id="resultEntryForm">
+            <div >
+               
+                <div class="panel panel-warning">
+                    <div class="panel-heading">
+                        #{odsfaClinicBean.requestable.jiConfig.type}--#{odsfaClinicBean.requestable.jiConfig.name}  
+                    </div>
+                    <div class="panel-body">
+
+
+                        
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12">
+                                <h:outputText  value="#{odp.parameter}" /> 
+                            </div> 
+
+
+                        </div>
+                        <p:separator  />
+
+                        <c:forEach items="#{odsfaClinicBean.requestable.parameters}" var="params">
+                            <div class="row">
+
+
+                                <div  class="col-xs-6 col-sm-6 col-sm-6">
+                                    <h:outputText value="#{params.jipc.parameterName}" style="margin: 5px" >
+                                    </h:outputText>
+                                </div>
+                                <div  class="col-xs-6 col-sm-6 col-sm-6">
+                                    <p:spinner suffix="#{params.jipc.paramUnit}" style="margin: 5px" rendered="#{params.jipc.hasRange}" value="#{params.value}" placeholder="0" styleClass="otherInput" >
+                                    </p:spinner> 
+
+
+
+
+
+                                    <p:outputPanel autoUpdate="false" rendered="#{params.jipc.hasPredefinedValues}" >
+                                        <div class="btn-group" style="margin: 4px 0px;">
+                                            <button type="button" class="btn btn-warning">#{odp.select}</button>
+                                            <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown">
+                                                <span class="caret"></span>
+                                            </button>
+                                            <ul class="dropdown-menu" role="menu">
+                                                <c:forEach var="predef" items="#{params.jipc.predefinedValues.predefinedValues}" >
+                                                    <li><p:commandLink id="#{params.jipc.parameterNameNoSpace}#{predef}" onclick="updateInput('resultEntryForm:input#{params.jipc.parameterNameNoSpace}', '#{predef}')">#{predef}</p:commandLink></li>                     
+                                                </c:forEach>
+                                            </ul>
+
+                                        </div>
+                                        <p:inputText value="#{params.value}" size="10"   id="input#{params.jipc.parameterNameNoSpace}" styleClass="otherInput"  />
+                                    </p:outputPanel>
+                                </div>
+
+                            </div>
+                        </c:forEach>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <button type="button" name="resultEntryOkBut" jsf:id="resultEntryOkButId" class="btn btn-warning" >
+                                    #{odp.submit}
+                                    <p:ajax  listener="#{odsfaClinicBean.odsfaResultSubmitButtonClickedListener}" process="@all"  oncomplete="cleanAllTextInputs('resultEntryForm')" />
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+            </h:form>
+        </h:body>
+    </ui:composition>
+</html>
+

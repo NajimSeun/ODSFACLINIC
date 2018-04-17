@@ -1,0 +1,131 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:jsf="http://xmlns.jcp.org/jsf" 
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <ui:composition>
+        <h:body>
+
+            <div class="panel panel-warning">
+                <div class=" panel-heading">
+                    #{odp.register}--#{odsfaClinicBean.edit}
+                </div>
+
+                
+                <h:form id="odsfaRegForm" >
+                    
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-xs-4 col-xs-offset-2 ">
+                                <label style="margin: 11.5px" class="text-right full-width" >#{odp.number}</label>
+                                <label style="margin: 11.5px" class="text-right full-width">#{odp.name}</label>
+                                <label style="margin: 11.5px" class="text-right full-width">#{odp.surname}</label>
+                                <label style="margin-top: 10px ;margin-bottom: 10; margin-left: 11.5px;margin-right: 11.5px" class="text-right full-width">#{odp.dob}</label>
+
+                                <label style="margin: 11.5px" class="text-right full-width">#{odp.address}</label>
+                                <label style="margin: 11.5px" class="text-right full-width">#{odp.phoneNum}</label>
+                                <label style="margin: 11.5px" class="text-right full-width">#{odp.sex}</label>
+                                <label style="margin: 11.5px" class="text-right full-width">#{odp.genotype}</label>
+                                <label style="margin: 11.5px" class="text-right full-width">#{odp.bloodGrp}</label>
+                            </div>
+                            <div class="col-xs-4 col-xs-offset-2 ">
+                                <p:inputText  id="cardNumInput"   value="#{odsfaPatientRegistrationBean.patient.cardNumber}" styleClass="full-width " style="margin: 4px;" placeholder="#{odp.number}" required="true" requiredMessage="#{odp.number} #{odp.required}" disabled="#{odsfaPatientRegistrationBean.cardNumberFieldDisabled}" />
+                                <p:inputText   value="#{odsfaPatientRegistrationBean.patient.name}" styleClass="full-width " style="margin: 4px" placeholder="#{odp.name}" required="true" requiredMessage="#{odp.name} #{odp.required}"/>
+                                <p:inputText  value="#{odsfaPatientRegistrationBean.patient.surname}" styleClass="full-width" style="margin: 4px" placeholder="#{odp.surname}" required="true" requiredMessage="#{odp.surname} #{odp.required}"/>
+                                <p:calendar   value="#{odsfaPatientRegistrationBean.patient.dateOfBirth}" navigator="true" yearRange="c-70:c+70" placeholder="#{odp.dob}" styleClass="full-width" style="margin: 4px"  required="false" />
+
+                                <p:inputTextarea autoResize="false" value="#{odsfaPatientRegistrationBean.patient.address}" placeholder="#{odp.address}" styleClass="full-width" style="margin: 4px" cols="20" rows="2" required="true" requiredMessage="#{odp.address}" />
+
+                                <p:inputMask value="#{odsfaPatientRegistrationBean.patient.phoneNumber}" mask="999-999-999-99" required="true" requiredMessage="#{odp.phoneNum} #{odp.required}" placeholder="#{odp.phoneNum}" styleClass="full-width" style="margin: 4px" />
+                                <div class="btn-group" style="margin:4px 0px;">
+                                    <button type="button" class="btn btn-warning">#{odp.sex}</button>
+                                    <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown">
+                                        <span class="caret"></span>
+                                    </button>
+
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><p:commandLink     onclick="updateInput('#{p:component('sexInput')}','#{odp.male}')">#{odp.male}</p:commandLink></li>
+                                        <li><p:commandLink     onclick="updateInput('#{p:component('sexInput')}','#{odp.female}')">#{odp.female}</p:commandLink></li>
+
+                                    </ul>
+
+                                </div>
+                                <h:inputText value="#{odsfaPatientRegistrationBean.patient.sex}" styleClass="form-control-odsfa otherInput" size="8" id="sexInput" required="true" requiredMessage="#{odp.sex} #{odp.required}" />
+                                <div class="btn-group" style="margin: 4px 0px;">
+                                    <button type="button" class="btn btn-warning">#{odp.genotype}</button>
+                                    <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown">
+                                        <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><p:commandLink onclick="updateInput('#{p:component('genotypeInput')}','#{odp.aa}')">#{odp.aa}</p:commandLink></li>                     
+                                        <li><p:commandLink onclick="updateInput('#{p:component('genotypeInput')}','#{odp.as}')">#{odp.as}</p:commandLink></li>
+                                        <li><p:commandLink onclick="updateInput('#{p:component('genotypeInput')}','#{odp.ac}')">#{odp.ac}</p:commandLink></li>
+                                        <li><p:commandLink onclick="updateInput('#{p:component('genotypeInput')}','#{odp.ss}')">#{odp.ss}</p:commandLink></li>
+                                        <li><p:commandLink onclick="updateInput('#{p:component('genotypeInput')}','#{odp.cc}')">#{odp.cc}</p:commandLink></li>
+                                    </ul>
+
+                                </div>
+                                <h:inputText value="#{odsfaPatientRegistrationBean.patient.genotype}" size="6" id="genotypeInput" styleClass="form-control-odsfa otherInput"  />
+                                <div class="btn-group" style="margin: 4px 0px;">
+                                    <button type="button" class="btn btn-warning">#{odp.bloodGrp}</button>
+                                    <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown">
+                                        <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><p:commandLink onclick="updateInput('#{p:component('bloodgroupInput')}','#{odp.apos}')" >#{odp.apos}</p:commandLink></li>
+                                        <li><p:commandLink onclick="updateInput('#{p:component('bloodgroupInput')}','#{odp.aneg}')" >#{odp.aneg}</p:commandLink></li>
+
+                                        <li><p:commandLink onclick="updateInput('#{p:component('bloodgroupInput')}','#{odp.bpos}')" >#{odp.bpos}</p:commandLink></li>
+
+                                        <li><p:commandLink onclick="updateInput('#{p:component('bloodgroupInput')}','#{odp.bneg}')" >#{odp.bneg}</p:commandLink></li>
+
+                                        <li><p:commandLink onclick="updateInput('#{p:component('bloodgroupInput')}','#{odp.abpos}')">#{odp.abneg}</p:commandLink></li>
+
+                                        <li><p:commandLink onclick="updateInput('#{p:component('bloodgroupInput')}','#{odp.abneg}')" >#{odp.abneg}</p:commandLink></li>
+
+                                        <li><p:commandLink onclick="updateInput('#{p:component('bloodgroupInput')}','#{odp.opos}')" >#{odp.opos}</p:commandLink></li>
+
+                                        <li><p:commandLink onclick="updateInput('#{p:component('bloodgroupInput')}','#{odp.oneg}')" >#{odp.oneg}</p:commandLink></li>
+
+
+
+                                    </ul>
+
+                                </div>
+                                <h:inputText value="#{odsfaPatientRegistrationBean.patient.bloodGroup}" size="5" id="bloodgroupInput" styleClass="form-control-odsfa otherInput"  />
+
+
+
+
+                            </div>
+                        </div> 
+
+                       <div class="row">
+                            <div class="col-xs-12">
+                                <button type="button"  name="odsfaRegButton" jsf:id="odsfaRegButton" class="btn btn-warning full-width" style="margin-top: 4px"  >
+                                    #{odp.submit}
+                                    
+                                    <p:ajax event="click" process="@all"    listener="#{odsfaPatientRegistrationBean.OdsfaRegistrationButtonClickedListener}"  oncomplete="cleanAllTextInputs('odsfaRegForm')"   />
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    
+                        
+                    
+                </h:form>
+
+
+            </div>
+
+
+        </h:body>
+    </ui:composition>
+</html>
+
